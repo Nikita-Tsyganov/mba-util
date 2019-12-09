@@ -8,7 +8,7 @@
           label-for="segment"
           description="% is the reach potential of the segment"
         >
-          <b-form-select id="segment" v-model="segment" :options="segments" size="lg"></b-form-select>
+          <b-form-select id="segment" v-model="segment" :options="segments" size="lg"/>
         </b-form-group>
         <b-form-group
           id="ig-budget"
@@ -26,7 +26,7 @@
               step="50000"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group
@@ -47,7 +47,7 @@
               :value="getChannelAmount(channel)"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
             <b-input-group-append>
               <b-button variant="primary" @click="copyToClipboard(getChannelAmount(channel))">Copy</b-button>
             </b-input-group-append>
@@ -68,7 +68,7 @@
               :value="overallCoverage"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group
@@ -86,7 +86,7 @@
               :value="costPerPercent"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
       </b-form>
@@ -103,7 +103,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-market-share" label="Forecast Market Share:" label-for="market-share">
@@ -116,7 +116,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-production" label="Forecast Production:" label-for="production">
@@ -129,7 +129,7 @@
               :value="production"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
             <b-input-group-append>
               <b-button variant="primary" @click="copyToClipboard(production)">Copy</b-button>
             </b-input-group-append>
@@ -139,17 +139,59 @@
     </b-card>
     <b-card class="mt-4" header="Manufacturing">
       <b-form>
-        <b-form-group id="ig-total-capacity" label="Total Capacity:" label-for="total-capacity">
+        <b-form-group id="ig-employees" label="Number of Employees:" label-for="employees">
           <b-input-group size="lg">
             <b-form-input
-              id="total-capacity"
-              v-model="totalCapacity"
+              id="employees"
+              v-model="employees"
               type="number"
               min="0"
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-workforce-capacity" label="Factory Workforce Capacity:" label-for="workforce-capacity">
+          <b-input-group size="lg">
+            <b-form-input
+              id="workforce-capacity"
+              v-model="workforceCapacity"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+              placeholder="0"
+            />
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-plant-capacity" label="Effective Plant:" label-for="plant-capacity">
+          <b-input-group size="lg">
+            <b-form-input
+              id="plant-capacity"
+              v-model="plantCapacity"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+              placeholder="0"
+            />
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-total-capacity" label="Total Capacity:" label-for="total-capacity">
+          <b-input-group size="lg">
+            <b-form-input
+              id="total-capacity"
+              type="number"
+              min="0"
+              step="1"
+              :value="totalCapacity"
+              placeholder="0"
+              disabled
+            />
+            <b-input-group-append>
+              <b-button variant="primary" @click="copyToClipboard(totalCapacity)">Copy</b-button>
+            </b-input-group-append>
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-efficiency" label="Production Efficiency:" label-for="efficiency">
@@ -162,22 +204,67 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
-        <b-form-group id="ig-real-capacity" label="Real Capacity:" label-for="real-capacity">
+        <b-form-group id="ig-usable-capacity" label="Usable Capacity:" label-for="usable-capacity">
           <b-input-group size="lg">
             <b-form-input
-              id="real-capacity"
+              id="usable-capacity"
               type="number"
               min="0"
               step="1"
-              :value="realCapacity"
+              :value="usableCapacity"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
             <b-input-group-append>
-              <b-button variant="primary" @click="copyToClipboard(realCapacity)">Copy</b-button>
+              <b-button variant="primary" @click="copyToClipboard(usableCapacity)">Copy</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-desired-capacity" label="Desired Usable Capacity:" label-for="desired-capacity">
+          <b-input-group size="lg">
+            <b-form-input
+              id="desired-capacity"
+              v-model="desiredCapacity"
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+              placeholder="0"
+            />
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-capacity-shortage" label="Capacity Shortage:" label-for="capacity-shortage">
+          <b-input-group size="lg">
+            <b-form-input
+              id="capacity-shortage"
+              type="number"
+              min="0"
+              step="1"
+              :value="capacityShortage"
+              placeholder="0"
+              disabled
+            />
+            <b-input-group-append>
+              <b-button variant="primary" @click="copyToClipboard(capacityShortage)">Copy</b-button>
+            </b-input-group-append>
+          </b-input-group>
+        </b-form-group>
+        <b-form-group id="ig-staff-to-hire" label="Staff to Hire:" label-for="staff-to-hire">
+          <b-input-group size="lg">
+            <b-form-input
+              id="staff-to-hire"
+              type="number"
+              min="0"
+              step="1"
+              :value="staffToHire"
+              placeholder="0"
+              disabled
+            />
+            <b-input-group-append>
+              <b-button variant="primary" @click="copyToClipboard(staffToHire)">Copy</b-button>
             </b-input-group-append>
           </b-input-group>
         </b-form-group>
@@ -196,7 +283,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group
@@ -214,7 +301,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-style-new" label="New Style/Design:" label-for="style-new">
@@ -228,7 +315,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-specs-new" label="New Technical Specifications:" label-for="specs-new">
@@ -242,7 +329,7 @@
               step="1"
               value="0"
               placeholder="0"
-            ></b-form-input>
+            />
           </b-input-group>
         </b-form-group>
         <b-form-group id="ig-prime-cost" label="Total prime cost:" label-for="prime-cost">
@@ -255,7 +342,7 @@
               :value="primeCost"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
             <b-input-group-append>
               <b-button variant="primary" @click="copyToClipboard(primeCost)">Copy</b-button>
             </b-input-group-append>
@@ -271,7 +358,7 @@
               :value="changeCost"
               placeholder="0"
               disabled
-            ></b-form-input>
+            />
             <b-input-group-append>
               <b-button variant="primary" @click="copyToClipboard(changeCost)">Copy</b-button>
             </b-input-group-append>
@@ -324,8 +411,11 @@ export default {
       budget: 0,
       demand: 0,
       marketShare: 0,
-      totalCapacity: 0,
+      employees: 0,
+      workforceCapacity: 0,
+      plantCapacity: 0,
       efficiency: 0,
+      desiredCapacity: 0,
       style: 0,
       specs: 0,
       styleExst: 0,
@@ -14567,8 +14657,17 @@ export default {
     production: function() {
       return this.percentageCalc(this.demand, this.marketShare);
     },
-    realCapacity: function() {
+    totalCapacity: function() {
+      return Math.round(Math.sqrt(this.workforceCapacity * this.plantCapacity));
+    },
+    usableCapacity: function() {
       return this.percentageCalc(this.totalCapacity, this.efficiency);
+    },
+    capacityShortage: function() {
+      return this.desiredCapacity - this.usableCapacity;
+    },
+    staffToHire: function() {
+      return Math.ceil(this.capacityShortage / (this.workforceCapacity / this.employees || 0) || 0);
     },
     styleCost: function() {
       return +(this.styleNew * 0.12).toFixed(4);
