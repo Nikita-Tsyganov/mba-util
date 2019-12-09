@@ -13,7 +13,7 @@
         <b-form-group
           id="ig-budget"
           label="Your budget:"
-          label-for="name"
+          label-for="budget"
           description="Only works in increments of $50000"
         >
           <b-input-group size="lg" prepend="$">
